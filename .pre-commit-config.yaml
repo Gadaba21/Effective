@@ -1,0 +1,28 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.10
+    hooks:
+      - id: ruff
+        args:
+          - --fix
+          - --output-format=github
+
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: mypy
+        name: Run mypy
+        entry: sh -c 'mypy .'
+        language: system
+        stages: [pre-push, pre-commit]
+        always_run: true
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        pass_filenames: false
+        always_run: true
